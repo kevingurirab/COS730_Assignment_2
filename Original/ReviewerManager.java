@@ -23,6 +23,7 @@ public class ReviewerManager {
         List<Reviewer> noConflicts = new ArrayList<>();
 
         for (Reviewer reviewer : reviewerList){
+            //some condition
             if (true){
                 noConflicts.add(reviewer);
             }

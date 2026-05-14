@@ -5,14 +5,14 @@ import java.util.List;
 
 public class SubmissionController {
     Validator validator;
-    Optimised.DBmgr dBmgr;
+    SubmissionRepository submissionRepository;
     Optimised.UI ui;
     ReviewerManager reviewerManager;
     Optimised.EvaluationManager evaluationManager;
 
-    public SubmissionController(Validator validator, DBmgr db, Optimised.UI ui, ReviewerManager reviewManager, Optimised.EvaluationManager evaluationManager){
+    public SubmissionController(Validator validator, SubmissionRepository db, Optimised.UI ui, ReviewerManager reviewManager, Optimised.EvaluationManager evaluationManager){
         this.validator = validator;
-        this.dBmgr = db;
+        this.submissionRepository = db;
         this.ui = ui;
         this.reviewerManager = reviewManager;
         this.evaluationManager = evaluationManager;
@@ -22,20 +22,18 @@ public class SubmissionController {
         String valid = validator.validateFormat(data);
 
         if (valid.equals("valid")){
-            dBmgr.saveSubmission(data);
-            //wait for confirmation
+            submissionRepository.saveSubmission(data);
+            ui.returnSuccess();
 
-            //Decision logic
-            //should initiate the assigning of reviewers
-            //Change the name of the method
             String reviewerStatus = reviewerManager.getAvailableReviewers();
 
-            if (reviewerStatus.equals("No reviewer")){
-                /// ///ui
+            if (reviewerStatus.equals("success")){
+                evaluationManager.startEvaluation();
             }
 
             else{
-                evaluationManager.startEvaluation();
+                // assume always success
+                //retry
             }
         }
 

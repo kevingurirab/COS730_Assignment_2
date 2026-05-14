@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Reviewer {
     EvaluationManager evaluationManager;
-    DBmgr dBmgr;
+    ReviewerRepository reviewerRepository;
 
     String conflicts;
     int workload;

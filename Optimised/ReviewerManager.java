@@ -3,7 +3,7 @@ package Optimised;
 import java.util.List;
 
 public class ReviewerManager {
-    DBmgr dBmgr;
+    ReviewerRepository reviewerRepository;
 
     public ReviewerManager(){
 
@@ -11,13 +11,13 @@ public class ReviewerManager {
 
     //Change the name of this method
     public String getAvailableReviewers() {
-        List<Reviewer> reviewerList = dBmgr.fetchReviewers();
+        List<Reviewer> reviewerList = reviewerRepository.fetchReviewers();
 
         List<Reviewer> finalList = filterReviewers(reviewerList);
-
-        if (finalList.isEmpty()){
+        //assume always not empty
+        /*if (finalList.isEmpty()){
             return "No reviewers";
-        }
+        }*/
 
         for (Reviewer reviewer: finalList){
             reviewer.assignReview();

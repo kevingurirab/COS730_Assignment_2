@@ -7,10 +7,10 @@ public class EvaluationManager {
     NotificationService notificationService;
     List<Reviewer> reviewers;
     List<Double> scores = new ArrayList<>();
-    DBmgr dBmgr;
+    ScoreRepository scoreRepository;
 
-    public EvaluationManager(DBmgr db, List<Optimised.Reviewer> reviewers){
-        dBmgr = db;
+    public EvaluationManager(ScoreRepository db, List<Optimised.Reviewer> reviewers){
+        scoreRepository = db;
         this.reviewers = reviewers;
     }
 
@@ -19,7 +19,7 @@ public class EvaluationManager {
     }
 
     public void submitScore(double score){
-        dBmgr.saveScore(score);
+        scoreRepository.saveScore(score);
         scores.add(score);
 
         if (scores.size() == reviewers.size()){

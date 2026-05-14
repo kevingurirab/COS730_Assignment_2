@@ -14,10 +14,10 @@ public class UI {
     }
 
     public void returnError(){
-
+        System.out.println("Validation Error");
     }
 
     public void returnSuccess(){
-
+        System.out.println("Research Output Submitted");
     }
 }
